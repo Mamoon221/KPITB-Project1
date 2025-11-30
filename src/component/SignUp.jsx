@@ -1,5 +1,5 @@
 import React, { use, useState } from 'react'
-import { data } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
@@ -17,12 +17,40 @@ const SignUp = () => {
     setdata({...data,[name]:value})
 
   }
+  
+  const navigate = useNavigate()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if(data.name == '' || data.email == '' || data.password == ''){
+      alert("Enter Your Details ")
+    }
+    else{
+       const getData = JSON.parse(localStorage.getItem('user') || '[]');
+    let arr = [];
+    arr = [...getData]
+    arr.push(data)
+
+    // }
+    // const getData = JSON.parse(localStorage.getItem('user') || '[]')
+    // let arr = [];
+    // arr = [...getData]
+    // arr.push(data)
+
+    localStorage.setItem('user', JSON.stringify(arr))
+
+    alert("SignUp Successfully");
+    navigate("/login")
+
+  }
+}
+
+
   const [data, setdata] = useState(userDetail);
-  console.log(data)
+  // console.log(data)
   return (
     <>
      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-  <form className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
+  <form className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm" onSubmit={handleSubmit}>
     
     <div className="mb-6">
       <p className="text-2xl font-semibold text-center text-gray-800">Signup</p>
@@ -104,3 +132,45 @@ export default SignUp
 // jb bhi hum kisi input pr kuch likhein gy tu oska name pata chaljaye ga ye name hai, email hai, or password so then we assign value 
 // value is key ...... basically is name mai hum wu name pass karein gy jiski value ko pass karna ho agr email hoga tu email ky andr value ko pass 
 // karein gy 
+
+// Now our next target is to store this data of email,name,password  in local storage 
+
+// So on form we will apply onsubmit event and then we will take variable this handleSUbmit
+// because The default nature of form is jb bhi hum isky opr click krty hai ye refresh hota hai. So is bydefault nature ko rokhne ke liye 
+// event.prevent use krty hai 
+// Ab hum handleSubmit pr chaty hai ky local storage mai humara data store ho jaye.. now we will create getData variable 
+// getData.locatstorgre.getItems agr local storge ky andr data ko store krna hai tu likhna hoga setItms or agr localStorage se
+// data ko lena hai tu getItems 
+
+// localStorage.setItems('user', data) in braces First we will give key name and other is object
+
+// When ever we store data in local storge we will convert to json
+// IMPORTANT WHEN WE SET DATA WE SET IT IN JSON BUT WHEN WE NEED TO GET IT OUT WE NEED TO CONVERT TO OBJECT 
+// JSON.parse convert JSON into object 
+
+// const getData = JSON.parse(localStorage.getItem('user') || '[]')
+// we use OR operator because agr hum get kar rahe hai user ko jo humari key hai agr humare pass key ni hoti to empty array milni chaye 
+// let arr = [];
+// So now we make array which is empty 
+//    arr = [...getData]
+// now is array ky andr hum assign karein gy is get data ko is se ye hoga jo humare pass get data hai isko hum store kar rahe hai 
+// get data mai humare pass previous data hoga isko hum store karein gy 
+//   arr.push(data)
+// Now in this array we will push data so array.push  method will add it in last
+
+// getdata is previous data store hoga osky saat jo new data hoga wu bhi store ho jaye ga 
+
+// we do this all because we need data in arry inside object 
+
+// --------------------------------------
+// If we to add pop ups and validations  
+
+// want condition to success navigation
+
+// we add statement if any of this is empty show message show alert msg for enter details and also for signup successfully 
+
+// ab hum chahty hai jaisy hi successfully signup ho jaye hum navigate ho jaye login py 
+// So in create router we have method use navigate with the help of that we cam navigate from one screen to another screen we can navigate
+//  so we decleare usenavigate function() and after delceartion we will now write it after aleart(signup successfully) we will navigate and will
+// give path 
+// Now we will go to login will create login logic 
