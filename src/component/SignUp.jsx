@@ -49,11 +49,11 @@ const SignUp = () => {
   // console.log(data)
   return (
     <>
-     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+     <div className="min-h-screen flex items-center justify-center bg-[#0c67A0]">
   <form className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm" onSubmit={handleSubmit}>
     
     <div className="mb-6">
-      <p className="text-2xl font-semibold text-center text-gray-800">Signup</p>
+      <p className="text-2xl font-bold text-center text-[#007bff]">Signup</p>
     </div>
 
     <div className="flex flex-col gap-4">
@@ -88,7 +88,7 @@ const SignUp = () => {
     </div>
 
     <button 
-      className="mt-5 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+      className="mt-5 w-full bg-[#033452]  shadow-lg shadow-blue-500/50 ... text-white py-3 rounded-lg hover:bg-blue-700 transition"
     >
       Sign Up
     </button>
